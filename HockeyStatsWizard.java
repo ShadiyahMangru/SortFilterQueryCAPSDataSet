@@ -709,38 +709,38 @@ abstract class Output{
 		}		
 	}
 	
-	//gives user option of sorting or filtering stats
+	//gives user option of displaying/sorting/filtering/querying stats
 	public static int statsWizard(){
-		System.out.println();
-		System.out.println("**********************************************************************************");
+		String [] OPTIONS = {"Display Roster", "Sort Stats", "Filter Stats", "Query Players"};
+		
+		System.out.println("\n**********************************************************************************");
 		System.out.println("WELCOME TO 2017-2018 WASHINGTON CAPITALS' (SOME) REGULAR SEASON STATS WIZARD!");
-		System.out.println("\nSelect an option:\n1.) Display Roster \n2.) Sort Stats \n3.) Filter Stats \n4.) Query Players \n\n\n5.) Exit");
+		System.out.println("\nSelect an option: ");
+		for(int i = 0; i < OPTIONS.length; i++){
+			System.out.println((i+1) + "). " + OPTIONS[i]);	
+		}
+		System.out.println("\n" + (OPTIONS.length + 1) + "). " + "Exit");
 		System.out.println("\n*********************************************");
 		
 		try{
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 			System.out.print("Enter selection: ");
 			int userChoice = Integer.parseInt(reader.readLine());	
-			System.out.println();
-				switch(userChoice){
-					case 1: System.out.println(  "You selected: DISPLAY");
-						return 1;
-					case 2: System.out.println("  You selected: SORT");
-						return 2;
-					case 3: System.out.println("  You selected: FILTER");
-						return 3;
-					case 4: System.out.println(  "You selected: QUERY");
-						return 4;
-					case 5: System.out.print("  You selected: EXIT");
-						System.exit(0);
-						break;
-					default: Output.statsWizard(); //reload menu bc invalid selection
-						break;	
-				}
+			if(userChoice < (OPTIONS.length + 1)){
+				System.out.println("  You selected:  " + OPTIONS[userChoice - 1]);
+				return userChoice;
+			}
+			else if(userChoice == (OPTIONS.length + 1)){
+				System.out.print("  You selected: EXIT");
+				System.exit(0);
+			}
+			else{
+				Output.statsWizard(); //reload menu bc invalid selection	
+			}
 		}
 		catch(Exception e){
-		System.out.println("oh noz, there is an Exception: " + e + "\nTry again!");
-		statsWizard();
+			System.out.println("oh noz, there is an Exception: " + e + "\nTry again!");
+			statsWizard();
 		}
 		return 1;
 	}
