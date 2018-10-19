@@ -282,25 +282,25 @@ class Skaters extends HockeyPlayer implements Comparable<Skaters>{
 	public void setSkatersRoster(){
 		skatersRoster = new ArrayList<Skaters>();
 		skatersRoster.add(new Skaters("Ovechkin", "Forward, LW", "Russia", 49, 38, 87, 3, "R"));
+		skatersRoster.add(new Skaters("Vrana", "Forward, LW", "Czech Republic", 13, 14, 27, 2, "L"));
+		skatersRoster.add(new Skaters("Gersich", "Forward, LW", "USA", 0, 1, 1, -1, "L"));
+		skatersRoster.add(new Skaters("Walker", "Forward, LW", "Wales", 1, 0, 1, 1, "L"));
+		skatersRoster.add(new Skaters("Burakovsky", "Forward, LW", "Austria", 12, 13, 25, 3, "L"));
 		skatersRoster.add(new Skaters("Kuznetsov", "Forward, C", "Russia", 27, 56, 83, 3, "L"));
 		skatersRoster.add(new Skaters("Backstrom", "Forward, C", "Sweden", 21, 50, 71, 5, "L"));
-		skatersRoster.add(new Skaters("Carlson", "Defense", "USA", 15, 53, 68, 0, "R"));
-		skatersRoster.add(new Skaters("Oshie", "Forward, RW", "USA", 18, 29, 47, 2, "R"));
-		skatersRoster.add(new Skaters("Eller", "Forward, C", "Denmark", 18, 20, 38, -6, "L"));
-		skatersRoster.add(new Skaters("Wilson", "Forward, RW", "Canada", 14, 21, 35, 10, "R"));
-		skatersRoster.add(new Skaters("Connolly", "Forward, RW", "Canada", 15, 12, 27, -6, "R"));
-		skatersRoster.add(new Skaters("Vrana", "Forward, LW", "Czech Republic", 13, 14, 27, 2, "L"));
-		skatersRoster.add(new Skaters("Peluso", "Forward, RW", "Canada", 0, 0, 0, 0, "R"));
-		skatersRoster.add(new Skaters("O'Brien", "Forward, C", "Canada", 0, 0, 0, 0, "L"));
-		skatersRoster.add(new Skaters("Gersich", "Forward, LW", "USA", 0, 1, 1, -1, "L"));
 		skatersRoster.add(new Skaters("Graovac", "Forward, C", "Canada", 0, 0, 0, -3, "L"));
 		skatersRoster.add(new Skaters("Boyd", "Forward, C", "USA", 0, 1, 1, 2, "R"));
-		skatersRoster.add(new Skaters("Walker", "Forward, LW", "Wales", 1, 0, 1, 1, "L"));
-		skatersRoster.add(new Skaters("Smith-Pelly", "Forward, RW", "Canada", 7, 9, 16, -6, "R"));
-		skatersRoster.add(new Skaters("Burakovsky", "Forward, LW", "Austria", 12, 13, 25, 3, "L"));
+		skatersRoster.add(new Skaters("O'Brien", "Forward, C", "Canada", 0, 0, 0, 0, "L"));
+		skatersRoster.add(new Skaters("Eller", "Forward, C", "Denmark", 18, 20, 38, -6, "L"));
 		skatersRoster.add(new Skaters("Stephenson", "Forward, C", "Canada", 6, 12, 18, 13, "L"));
 		skatersRoster.add(new Skaters("Beagle", "Forward, C", "Canada", 7, 15, 22, 3, "R"));
+		skatersRoster.add(new Skaters("Oshie", "Forward, RW", "USA", 18, 29, 47, 2, "R"));
+		skatersRoster.add(new Skaters("Wilson", "Forward, RW", "Canada", 14, 21, 35, 10, "R"));
+		skatersRoster.add(new Skaters("Connolly", "Forward, RW", "Canada", 15, 12, 27, -6, "R"));
+		skatersRoster.add(new Skaters("Peluso", "Forward, RW", "Canada", 0, 0, 0, 0, "R"));
+		skatersRoster.add(new Skaters("Smith-Pelly", "Forward, RW", "Canada", 7, 9, 16, -6, "R"));
 		skatersRoster.add(new Skaters("Chiasson", "Forward, RW", "Canada", 9, 9, 18, 1, "R"));
+		skatersRoster.add(new Skaters("Carlson", "Defense", "USA", 15, 53, 68, 0, "R"));
 		skatersRoster.add(new Skaters("Orlov", "Defense", "Russia", 10, 21, 31, 10, "L"));
 		skatersRoster.add(new Skaters("Niskanen", "Defense", "USA", 7, 22, 29, 24, "R"));
 		skatersRoster.add(new Skaters("Djoos", "Defense", "Sweden", 3, 11, 14, 13, "L"));
@@ -480,7 +480,30 @@ class FilterStatsGoalies extends Goalies{
 }
 
 class QueryGoalies extends Goalies{
-		
+	//fields
+	private ArrayList<String> queryGoaliesBP;
+	
+	//constructor
+	public QueryGoalies(){
+		setQueryGoaliesBP();
+	}
+	
+	//setter
+	public void setQueryGoaliesBP(){
+		queryGoaliesBP = new ArrayList<String>();
+		queryGoaliesBP.add(getGoaliesRoster().get(0).getBirthplace());
+		for(int i = 1; i< getGoaliesRoster().size(); i++){
+			if(queryGoaliesBP.contains(getGoaliesRoster().get(i).getBirthplace()) == false){
+				queryGoaliesBP.add(getGoaliesRoster().get(i).getBirthplace());	
+			}
+		}
+	}
+	
+	//getter
+	public ArrayList<String> getQueryGoaliesBP(){
+		return queryGoaliesBP;	
+	}
+	
 }
 
 class SortStatsSkaters extends Skaters{
@@ -624,7 +647,29 @@ class FilterStatsSkaters extends Skaters{
 }
 
 class QuerySkaters extends Skaters{
-
+	//fields
+	private ArrayList<String> querySkatersBP;
+	
+	//constructor
+	public QuerySkaters(){
+		setQuerySkatersBP();
+	}
+	
+	//setter
+	public void setQuerySkatersBP(){
+		querySkatersBP = new ArrayList<String>();
+		querySkatersBP.add(getSkatersRoster().get(0).getBirthplace());
+		for(int i = 1; i< getSkatersRoster().size(); i++){
+			if(querySkatersBP.contains(getSkatersRoster().get(i).getBirthplace()) == false){
+				querySkatersBP.add(getSkatersRoster().get(i).getBirthplace());	
+			}
+		}
+	}
+	
+	//getter
+	public ArrayList<String> getQuerySkatersBP(){
+		return querySkatersBP;	
+	}
 }
 
 abstract class Output{
@@ -634,15 +679,18 @@ abstract class Output{
 	
 	//outputs all players and some of their stats in a predetermined order
 	public static void printRosterDetails(){
+		System.out.println("*****************************************************************************");
+		System.out.println("THE 2017-2018 REGULAR SEASON ROSTER AND SOME OF THEIR STATS:\n");
 		Skaters skaters = new Skaters();
 		for(Skaters s : skaters.getSkatersRoster()){
-			System.out.println("Name: " + s.getLastName() + "\tPosition: " + s.getPosition() + "\tGoals: " + s.getGoals() + "\tAssists: " + s.getAssists() + "\tPoints: " + s.getPoints() + "\t+/-: " + s.getPlusMinus());	
+			System.out.println("Position: " + s.getPosition() + "\tGoals: " + s.getGoals() + "\tAssists: " + s.getAssists() + "\tPoints: " + s.getPoints() + "\t+/-: " + s.getPlusMinus() + "\t\tName: " + s.getLastName());	
 		}
 		Goalies goalies = new Goalies();
 		System.out.println();
 		for(Goalies g : goalies.getGoaliesRoster()){
-			System.out.println("Name: " + g.getLastName() + "\tPosition: " + g.getPosition() + "\tShots Against: " + g.getShotsAgainst() + "\tGoals Against: " + g.getGoalsAgainst() + "\tSaves: " + g.getSaves());	
+			System.out.println("Position: " + g.getPosition() + "\tShots Against: " + g.getShotsAgainst() + "\tGoals Against: " + g.getGoalsAgainst() + "\tSaves: " + g.getSaves() + "\t\tName: " + g.getLastName());	
 		}
+		mainMenu();
 	}
 	
 	//prints an arrayList of skaterStats
@@ -666,7 +714,7 @@ abstract class Output{
 		System.out.println();
 		System.out.println("**********************************************************************************");
 		System.out.println("WELCOME TO 2017-2018 WASHINGTON CAPITALS' (SOME) REGULAR SEASON STATS WIZARD!");
-		System.out.println("\nSelect an option:\n1.) Sort Stats \n2.) Filter Stats \n3.) Query Players \n\n\n4.) Exit");
+		System.out.println("\nSelect an option:\n1.) Display Roster \n2.) Sort Stats \n3.) Filter Stats \n4.) Query Players \n\n\n5.) Exit");
 		System.out.println("\n*********************************************");
 		
 		try{
@@ -675,13 +723,15 @@ abstract class Output{
 			int userChoice = Integer.parseInt(reader.readLine());	
 			System.out.println();
 				switch(userChoice){
-					case 1: System.out.println("  You selected: SORT");
+					case 1: System.out.println(  "You selected: DISPLAY");
 						return 1;
-					case 2: System.out.println("  You selected: FILTER");
+					case 2: System.out.println("  You selected: SORT");
 						return 2;
-					case 3: System.out.println(  "You selected: QUERY");
+					case 3: System.out.println("  You selected: FILTER");
 						return 3;
-					case 4: System.out.print("  You selected: EXIT");
+					case 4: System.out.println(  "You selected: QUERY");
+						return 4;
+					case 5: System.out.print("  You selected: EXIT");
 						System.exit(0);
 						break;
 					default: Output.statsWizard(); //reload menu bc invalid selection
@@ -694,6 +744,23 @@ abstract class Output{
 		}
 		return 1;
 	}
+	
+	public static void mainMenu(){
+		int sortFilter = statsWizard();
+		if(sortFilter == 1){
+			printRosterDetails();
+		}
+		else if(sortFilter == 2){
+			SortOutput.userSortOptions();
+		}
+		else if(sortFilter == 3){
+			FilterOutput.userFilterOptions();	
+		}
+		else{
+			QueryOutput.userQueryOptions();	
+		}
+	}
+	
 }
 
 
@@ -720,37 +787,30 @@ class SortOutput extends Output{
 					case 1: System.out.println("  You selected: Sort Washington Capitals' Stats by POINTS");
 						SortStatsSkaters p = new SortStatsSkaters(1);
 						Output.printSkaters(p.getSkatersSorted() );
-						userSortOptions();
 						break;
 					case 2: System.out.println("  You selected: Sort Washington Capitals' Stats by GOALS");
 						SortStatsSkaters g = new SortStatsSkaters(2);
 						Output.printSkaters(g.getSkatersSorted() );
-						userSortOptions();
 						break;
 					case 3: System.out.println("  You selected: Sort Washington Capitals' Stats by ASSISTS");
 						SortStatsSkaters a = new SortStatsSkaters(3);
 						Output.printSkaters(a.getSkatersSorted() );
-						userSortOptions();
 						break;
 					case 4: System.out.println("  You selected: Sort Washington Capitals' Stats by +/-");
 						SortStatsSkaters pm = new SortStatsSkaters(4);
 						Output.printSkaters(pm.getSkatersSorted() );
-						userSortOptions();
 						break;
 					case 5: System.out.println("  You selected: Sort Washington Capitals' Stats by SHOTS AGAINST");
 						SortStatsGoalies sa = new SortStatsGoalies(1);
 						Output.printGoalies(sa.getGoaliesSorted() );
-						userSortOptions();
 						break;
 					case 6: System.out.println("  You selected: Sort Washington Capitals' Stats by GOALS AGAINST");
 						SortStatsGoalies ga = new SortStatsGoalies(2);
 						Output.printGoalies(ga.getGoaliesSorted() );
-						userSortOptions();
 						break;
 					case 7: System.out.println("  You selected: Sort Washington Capitals' Stats by SAVES");
 						SortStatsGoalies s = new SortStatsGoalies(3);
 						Output.printGoalies(s.getGoaliesSorted() );
-						userSortOptions();
 						break;
 					case 8: System.out.print("  You selected: EXIT");
 						System.exit(0);
@@ -758,6 +818,7 @@ class SortOutput extends Output{
 					default: userSortOptions(); //reload menu bc invalid selection
 						break;	
 				}
+				mainMenu();
 		}
 		catch(Exception e){
 		System.out.println("oh noz, there is an Exception: " + e + "\nTry again!");
@@ -810,31 +871,24 @@ class FilterOutput extends Output{
 				switch(userChoice){
 					case 1: System.out.println("  You selected: Filter Skater POINTS");
 						userDefinedSkaterFilter(1);
-						userFilterOptions();
 						break;
 					case 2: System.out.println("  You selected: Filter Skater GOALS");
 						userDefinedSkaterFilter(2);
-						userFilterOptions();
 						break;
 					case 3: System.out.println("  You selected: Filter Skater ASSISTS");
 						userDefinedSkaterFilter(3);
-						userFilterOptions();
 						break;
 					case 4: System.out.println("  You selected: Filter Skater +/-");
 						userDefinedSkaterFilter(4);
-						userFilterOptions();
 						break;
 					case 5: System.out.println("  You selected: Filter Goalie SHOTS AGAINST");
 						userDefinedGoalieFilter(1);
-						userFilterOptions();
 						break;
 					case 6: System.out.println("  You selected: Filter Goalie GOALS AGAINST");
 						userDefinedGoalieFilter(2);
-						userFilterOptions();
 						break;
 					case 7: System.out.println("  You selected: Filter Goalie SAVES");
 						userDefinedGoalieFilter(3);
-						userFilterOptions();
 						break;
 					case 8: System.out.print("  You selected: EXIT");
 						System.exit(0);
@@ -842,6 +896,7 @@ class FilterOutput extends Output{
 					default: userFilterOptions(); //reload menu bc invalid selection
 						break;	
 				}
+				mainMenu();
 		}
 		catch(Exception e){
 		System.out.println("oh noz, there is an Exception: " + e + "\nTry again!");
@@ -854,9 +909,27 @@ class QueryOutput extends Output{
 	//constructor
 	public QueryOutput(){
 	}
+		
+	public static void BPQueryOptions(){
+		ArrayList<String> bpQueryOptions = new ArrayList<String>();
+		
+		QuerySkaters qs = new QuerySkaters();
+		QueryGoalies qg = new QueryGoalies();
+		bpQueryOptions = qs.getQuerySkatersBP();
+		for(int i = 0; i<qg.getQueryGoaliesBP().size(); i++){
+			if(bpQueryOptions.contains(qg.getQueryGoaliesBP().get(i)) == false){
+				bpQueryOptions.add(qg.getQueryGoaliesBP().get(i));	
+			}
+		}
+		Collections.sort(bpQueryOptions);
+		System.out.println("Select a Birthplace from these options: ");
+		for(int i = 0; i<bpQueryOptions.size(); i++){
+			System.out.println((i+1) + "). " + bpQueryOptions.get(i));
+		}
+	}
 	
 	/**
-	* a method that outputs a menu to select which filtered stats to display on screen
+	* a method that outputs a menu to select which queried detail to display on screen
 	*/
 	public static void userQueryOptions(){
 		System.out.println();
@@ -871,14 +944,13 @@ class QueryOutput extends Output{
 			System.out.println();
 				switch(userChoice){
 					case 1: System.out.println("  You selected: Query Player Birthplace");
-						System.out.println("Select a Birthplace from these options....");
-						System.out.println("____ players were born in ________________.  These players are ...");
-						userQueryOptions();
+						BPQueryOptions();
+						System.out.println("Enter selection:  ");
+						System.out.println("\nResults:\t____ players were born in ________________.  These players are ...");
 						break;
 					case 2: System.out.println("  You selected: Query Skater Shoots");
 						System.out.println("Select 1.) L 2.) R");
 						System.out.println("_____ skaters shoot ____.  These skaters are....");
-						userQueryOptions();
 						break;
 					case 3: System.out.print("  You selected: EXIT");
 						System.exit(0);
@@ -886,14 +958,13 @@ class QueryOutput extends Output{
 					default: userQueryOptions(); //reload menu bc invalid selection
 						break;	
 				}
+				mainMenu();
 		}
 		catch(Exception e){
 			System.out.println("oh noz, there is an Exception: " + e + "\nTry again!");
 			userQueryOptions();
 		}
 	}
-	
-	
 }
 
 public class HockeyStatsWizard{
@@ -903,20 +974,6 @@ public class HockeyStatsWizard{
 	
 	//main method
 	public static void main(String... args){
-		System.out.println("************************************************");
-		System.out.println("SOME 2017-2018 REGULAR SEASON STATS:\n");
-		RosterOutput.printRosterDetails();
-		
-		
-		int sortFilter = Output.statsWizard();
-		if(sortFilter == 1){
-			SortOutput.userSortOptions();
-		}
-		else if(sortFilter == 2){
-			FilterOutput.userFilterOptions();	
-		}
-		else{
-			QueryOutput.userQueryOptions();	
-		}
+		Output.mainMenu();
 	}
 }
